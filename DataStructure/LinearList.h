@@ -1,52 +1,60 @@
 #pragma once
 #ifndef _LINEARLIST_H
 #define _LINEARLIST_H
+
+#include "Node.h"
 #include <exception>
 #include <iostream>
+#include <initializer_list>
+#include "Exception.h"
 
 template <typename T>
-class listNode
+class LList
 {
 private:
-	listNode* next;
-	T data;
+	Node<T>* m_Head;
 	int count;
 	void _PushBack(const T& newdata)
 	{
-		listNode* newNode = new listNode();
-		newNode->data = newdata;
-		newNode->next = nullptr;
-		listNode* head = next;
-		if (head == nullptr)
-		{
-			next = newNode;
+		try {
+			Node<T>* newNode = new Node<T>(newdata);
+			if (!newNode) throw FailedApplyForSpace();
+			newNode->next = nullptr;
+			Node<T>* head = m_Head;
+			if (!head)
+			{
+				m_Head = newNode;
+				count++;
+				return;
+			}
+			while (head->next != nullptr)
+			{
+				head = head->next;
+			}
+			head->next = newNode;
 			count++;
-			return;
 		}
-		while (head->next != nullptr)
+		catch (std::exception & e)
 		{
-			head = head->next;
+			std::cout << e.what() << std::endl;
 		}
-		head->next = newNode;
-		count++;
 	}
 
 	void _BackInsert(const int& insertIndex, const T& newdata)
 	{
-		if (next == nullptr && insertIndex != 0)
+		if (!m_Head && insertIndex != 0)
 			return;
 		if (insertIndex<0 || insertIndex>count)
 			return;
-		listNode* head = next;
+		Node<T>* head = m_Head;
 		int index = 1;
 		while (index < insertIndex)
 		{
 			head = head->next;
 			index++;
 		}
-		listNode* insertPostionNextNode = head->next;
-		listNode* newNode = new listNode();
-		newNode->data = newdata;
+		Node<T>* insertPostionNextNode = head->next;
+		Node<T>* newNode = new Node<T>(newdata);
 		newNode->next = insertPostionNextNode;
 		head->next = newNode;
 		count++;
@@ -59,18 +67,18 @@ private:
 	{
 		if (removeIndex<1 || removeIndex>count)
 			return;
-		listNode* head = next;
+		Node<T>* head = m_Head;
 		int index = 1;
 		while (index < removeIndex - 1)
 		{
 			head = head->next;
 			index++;
 		}
-		if (head->next == nullptr)
+		if (!head->next)
 			return;
-		listNode* preNode = head;
-		listNode* removeNode = head->next;
-		listNode* nextNode = removeNode->next;
+		Node<T>* preNode = head;
+		Node<T>* removeNode = head->next;
+		Node<T>* nextNode = removeNode->next;
 		preNode->next = nextNode;
 		delete removeNode;
 		removeNode = nullptr;
@@ -78,14 +86,14 @@ private:
 	}
 	void _RemoveBaseOnData(const T& removedata)
 	{
-		listNode* head = next;
-		listNode* preNode = nullptr;
-		while (head != nullptr)
+		Node<T>* head = m_Head;
+		Node<T>* preNode = nullptr;
+		while (head)
 		{
 			if (head->data == removedata)
 			{
-				listNode* nextNode = head->next;
-				listNode* removeNode = head;
+				Node<T>* nextNode = head->next;
+				Node<T>* removeNode = head;
 				preNode->next = nextNode;
 				delete removeNode;
 				count--;
@@ -94,36 +102,55 @@ private:
 			preNode = head;
 			head = head->next;
 		}
-		if (head == nullptr)
-			throw;
+		if (!head)
+			std::cerr << "this data is not exist£¡" << std::endl;
 	}
 public:
-	listNode() :next(nullptr), count(0) {}
-	listNode& PushBack(const T& newdata)
+	LList() :m_Head(nullptr), count(0) {}
+	LList(std::initializer_list<T> list)
+	{
+		if (!list.size()) return;
+		m_Head = new Node<T>(*list.begin());
+		Node<T>* head = m_Head;
+		for (auto iter = list.begin() + 1; iter != list.end(); ++iter)
+		{
+			try {
+				Node<T>* newNode = new Node<T>(*iter);
+				if (!newNode) throw FailedApplyForSpace();
+				head->next = newNode;
+				head = newNode;
+			}
+			catch (std::exception & e)
+			{
+				std::cout << e.what() << std::endl;
+			}
+		}
+	}
+	LList& PushBack(const T& newdata)
 	{
 		_PushBack(newdata);
 		return *this;
 	}
 
-	listNode& BackInsert(const int& insertIndex, const T& newdata)
+	LList& BackInsert(const int& insertIndex, const T& newdata)
 	{
 		_BackInsert(insertIndex, newdata);
 		return *this;
 	}
 
-	listNode& FrontInsert(const int& index, const T& newdata)
+	LList& FrontInsert(const int& index, const T& newdata)
 	{
 		_FrontInsert(index, newdata);
 		return *this;
 	}
 
-	listNode& Remove(const int& removeIndex)
+	LList& Remove(const int& removeIndex)
 	{
 		_Remove(removeIndex);
 		return *this;
 	}
 
-	listNode& RemoveBaseOnData(const T& removedata)
+	LList& RemoveBaseOnData(const T& removedata)
 	{
 		_RemoveBaseOnData(removedata);
 		return *this;
@@ -139,16 +166,16 @@ public:
 		operator <<(std::cout, *this);
 	}
 
-	friend std::ostream& operator <<(std::ostream& os,const listNode<T>* list)
+	friend std::ostream& operator <<(std::ostream& os,const LList* list)
 	{
 		return operator <<(os, *list);
 	}
 
-	friend std::ostream& operator <<(std::ostream& os, const listNode<T>& list)
+	friend std::ostream& operator <<(std::ostream& os, const LList& list)
 	{
-		if (!list.next) return os;
-		listNode* head = list.next;
-		while (head != nullptr)
+		if (!list.m_Head) return os;
+		Node<T>* head = list.m_Head;
+		while (head)
 		{
 			os << head->data << " ";
 			head = head->next;
@@ -156,30 +183,37 @@ public:
 		os << std::endl;
 		return os;
 	}
-	~listNode()
+	~LList()
 	{
+		Release();
 	}
 
 	void Release()
 	{
-		if (next == nullptr) return;
-		listNode* head = next;
-		while (head != nullptr)
+		if (!this->m_Head) return;
+		Node<T>* head = m_Head;
+		while (head)
 		{
-			listNode* deleteNode = head;
+			Node<T>* deleteNode = head;
 			head = deleteNode->next;
 			delete deleteNode;
 			count--;
 		}
-		next = nullptr;
+		m_Head = nullptr;
 	}
 
 	T& operator [](int index)const
 	{
-		if (index <0 || index >count - 1 || next == nullptr)
-			throw;
-		listNode* head = next;
-		for (size_t i = 0; i < index; ++i)
+		try {
+			if (index <0 || index >count - 1 || !m_Head)
+				throw new OutOfRange();
+		}
+		catch (std::exception & e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+		Node<T>* head = m_Head;
+		for (int i = 0; i < index; ++i)
 		{
 			head = head->next;
 		}
@@ -188,12 +222,18 @@ public:
 
 	void ReverseList(int index)
 	{
-		if (index <0 || index >count - 1 || next == nullptr)
-			throw;
-		listNode<T>* head = next;
-		listNode<T>* nextNode = head->next;
-		listNode<T>* nextNextNode = nullptr;
-		for (size_t i = 0; i < index; i++)
+		try{
+			if (index <0 || index >count - 1 || !m_Head)
+				throw new OutOfRange();
+		}
+		catch (std::exception & e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+		Node<T>* head = m_Head;
+		Node<T>* nextNode = head->next;
+		Node<T>* nextNextNode = nullptr;
+		for (int i = 0; i < index; i++)
 		{
 			if (nextNode)
 				nextNextNode = nextNode->next;
@@ -205,10 +245,10 @@ public:
 				nextNextNode = nextNextNode->next;
 			else nextNextNode = nullptr;
 		}
-		this->next->next = nextNode;
-		this->next = head;
+		this->m_Head->next = nextNode;
+		this->m_Head = head;
 	}
 };
 template<typename T>
-using List =listNode<T>;
+using List =LList<T>;
 #endif

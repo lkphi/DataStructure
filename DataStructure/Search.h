@@ -1,7 +1,7 @@
 #pragma once
 #ifndef _SEARCH_H
 #define _SEARCH_H
-#include "tree.h"
+#include "Tree.h"
 #include <cmath>
 
 template<typename type>

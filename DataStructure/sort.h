@@ -1,13 +1,13 @@
 #pragma once
 #ifndef _SORT_H
 #define _SORT_H
-#include "node.h"
-#include "queue.h"
+#include "Node.h"
+#include "Queue.h"
 #include "Heap.h"
 
 #pragma region Swap 
 template<typename T>
-void Swap(T& firstElement, T& secondElement)
+void Swap(T& firstElement, T& secondElement) noexcept
 {
 	T temp = firstElement;
 	firstElement = secondElement;
@@ -15,13 +15,13 @@ void Swap(T& firstElement, T& secondElement)
 }
 
 template<typename T>
-void Swap(T*& firstElement, T*& secondElement)
+void Swap(T* firstElement, T* secondElement) noexcept
 {
 	Swap(*firstElement, *secondElement);
 }
 
 template<typename T>
-void Swap(Node<T>*& firstElement, Node<T>*& secondElement)
+void Swap(Node<T>* firstElement, Node<T>* secondElement) noexcept
 {
 	T temp = firstElement->data;
 	firstElement->data = secondElement->data;
@@ -86,29 +86,29 @@ void CockTail_Sort(T array[], int arrayLength)
 	}
 }
 
-template<typename T>
-void Bubble_Sort(Node<T>& list)
-{
-	Node<T>* headi = list.next;
-	Node<T>* headj = nullptr;
-	int flag = 0;
-	while (headi->next)
-	{
-		flag = 0;
-		headj = headi->next;
-		while (headj)
-		{
-			if (headi->data > headj->data)
-			{
-				Swap(headi, headj);
-				flag = 1;
-			}
-			headj = headj->next;
-		}
-		if (flag == 0) break;
-	}
-	headi = headi->next;
-}
+//template<typename T>
+//void Bubble_Sort(Node<T>& list)
+//{
+//	Node<T>* headi = list.next;
+//	Node<T>* headj = nullptr;
+//	int flag = 0;
+//	while (headi->next)
+//	{
+//		flag = 0;
+//		headj = headi->next;
+//		while (headj)
+//		{
+//			if (headi->data > headj->data)
+//			{
+//				Swap(headi, headj);
+//				flag = 1;
+//			}
+//			headj = headj->next;
+//		}
+//		if (flag == 0) break;
+//	}
+//	headi = headi->next;
+//}
 #pragma endregion
 
 #pragma region Insertion Sort

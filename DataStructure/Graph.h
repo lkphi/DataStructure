@@ -1,7 +1,7 @@
 #pragma once
 #ifndef _GRAPH_H
 #define _GRAPH_H
-#include "queue.h"
+#include "Queue.h"
 #include "Heap.h"
 #include "Set.h"
 #define MaxValue 10000

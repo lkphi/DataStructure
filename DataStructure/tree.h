@@ -2,8 +2,14 @@
 #ifndef _TREE_H
 #define _TREE_H
 #include <ostream>
-#include "queue.h"
-#include "stack.h"
+#include "Queue.h"
+#include "Stack.h"
+
+enum RBTreeColor
+{
+	black = 0,
+	Red = 1,
+};
 
 template<typename T>
 class BiNode {
@@ -15,6 +21,7 @@ public:
 	BiNode(T data) :mLChild(nullptr), mRChild(nullptr), data(data) {}
 	int nodeApperanceTimes = 0;//为非递归后序遍历所需的字段;
 	int balanceFactor = 0;//平衡因子，左子树高度减去右子树高度
+	RBTreeColor color;//为红黑树准备
 };
 
 template<typename T>

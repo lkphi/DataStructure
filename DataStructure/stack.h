@@ -1,8 +1,8 @@
 #pragma once
 #ifndef _STACK_H
 #define _STACK_H
-#include <exception>
-#include "node.h"
+#include "Exception.h"
+#include "Node.h"
 
 template<class T>
 using stackNode=Node<T>;
@@ -202,36 +202,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const Stack<U>& cStack);
 	void Expand();
 };
-///
-///
-///
-class outOfRange :public std::exception
-{
-public:
-	const char* what()const 
-	throw()
-	{
-		return "Error! Out Of Range.\n";
-	}
-};
-class badSize :public std::exception
-{
-public:
-	const char* what()const
-	throw()
-	{
-		return "Error! Bad Size.\n";
-	}
-};
-class FailedApplyForSpace :public std::exception
-{
-public:
-	const char* what()const
-	throw()
-	{
-		return "Error! Apply For Space Failed.\n";
-	}
-};
+
 
 template<typename T>
 inline Stack<T>::Stack()
@@ -251,7 +222,7 @@ inline int Stack<T>::Size()const
 template<typename T>
 inline T Stack<T>::Pop()
 {
-	if (mTop == -1) throw outOfRange();
+	if (mTop == -1) throw OutOfRange();
 	return mStackArray[mTop--];
 }
 
@@ -272,7 +243,7 @@ inline void Stack<T>::Push(T data)
 template<typename T>
 inline T Stack<T>::Top()const
 {
-	if (mTop == -1) throw outOfRange();
+	if (mTop == -1) throw OutOfRange();
 	return mStackArray[mTop];
 }
 

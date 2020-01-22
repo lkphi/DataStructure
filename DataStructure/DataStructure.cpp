@@ -1,18 +1,18 @@
 ﻿// DataStructure.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 #include "LinearList.h"
-#include "stack.h"
-#include "queue.h"
+#include "Stack.h"
+#include "Queue.h"
 #include <string>
 #include "Search.h"
-#include "tree.h"
-#include "sort.h"
+#include "Tree.h"
+#include "Sort.h"
 #include "HashTable.h"
 #include "Heap.h"
 #include "Set.h"
 #include <iomanip>
 #include "Graph.h"
-#include "kmp.h"
+#include "Kmp.h"
 #include "Polygon.h"
 
 void printArray(int a[], unsigned int length);
@@ -148,33 +148,43 @@ int SDS_BFS(int index)
 int main()
 {
 	#pragma region test Linear List
-		//List<int>* node = new List<int>();
-		//(node->PushBack(2)).PushBack(34);
-		//(*node).PushBack(54).PushBack(44).PushBack(32);
-		//std::cout << node;
-		//(*node).BackInsert(3,89).BackInsert(3,23);
-		//(*node).FrontInsert(2,76);
-		//node->PrintList();
-		//(node->FrontInsert(-1, 89)).FrontInsert(2,55);
-		//std::cout << node;
-		//node->FrontInsert(0, 89);
-		//std::cout << node;
-		//node->FrontInsert(node->Length() + 1, 89);
-		//std::cout << node;
-		//std::cout << (*node)[4] << std::endl;
-		//node->ReverseList(0);
-		//std::cout << node;
-		//node->ReverseList(1);
-		//std::cout << node;
-		//node->ReverseList(2);
-		//std::cout << node;
-		//node->ReverseList(node->Length() - 1);
-		//node->RemoveBaseOnData(44);
-		//std::cout << node;
-		//std::cout << node->Length() << std::endl;
-		//node->Release();
-		//std::cout << node->Length() << std::endl;
-		//std::cout << node;
+	//List<int>* node = new List<int>();
+	//(node->PushBack(2)).PushBack(34);
+	//(*node).PushBack(54).PushBack(44).PushBack(32);
+	//std::cout << node;
+	//(*node).BackInsert(3,89).BackInsert(3,23);
+	//(*node).FrontInsert(2,76);
+	//node->PrintList();
+	//(node->FrontInsert(-1, 89)).FrontInsert(2,55);
+	//std::cout << node;
+	//node->FrontInsert(0, 89);
+	//std::cout << node;
+	//node->FrontInsert(node->Length() + 1, 89);
+	//std::cout << node;
+	//std::cout << (*node)[4] << std::endl;
+	//node->ReverseList(0);
+	//std::cout << node;
+	//node->ReverseList(1);
+	//std::cout << node;
+	//node->ReverseList(2);
+	//std::cout << node;
+	//node->ReverseList(node->Length() - 1);
+	//node->RemoveBaseOnData(44);
+	//std::cout << node;
+	//std::cout << node->Length() << std::endl;
+	//node->Release();
+	//std::cout << node->Length() << std::endl;
+	//std::cout << node;
+	//List<float>* fList = new List<float>{ 1.4f,5.4f,8.9f,0.5f };
+	//List<float>* fList1 = new List<float>{ };
+	//List<float> fList2 = { 1.4,6.7,9.0,4.5};
+	//std::cout << fList;
+	//std::cout << fList1;
+	//std::cout << fList2;
+	//delete fList;
+	//fList = nullptr;
+	//delete fList1;
+	//fList1 = nullptr;
 	#pragma endregion
 
 	#pragma region test polygon
