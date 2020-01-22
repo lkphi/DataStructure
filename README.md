@@ -35,7 +35,7 @@ To-Do：
 ## 堆栈
 实现了堆栈的主要操作，采用了数组和链表的方式存储对象。
 
-详见 ```stack.h```
+详见 ```Stack.h```
 
 测试程序详见```DataStructure.cpp```中的```#pragma region test stack```和```#pragma region test Stack``` 部分
 ### 课件内容
@@ -45,13 +45,13 @@ To-Do：
 其中双端队列是用链表的方式存储数据，后续考虑加上采用数组形式的双端队列，
 单端队列是用链表实现，循环队列是用数组实现
 
-详见 ```queueService.h```、```queue.h```
+详见 ```QueueService.h```、```Queue.h```
 
 测试程序详见```DataStructure.cpp```中的```#pragma region test LoopQueue```、```#pragma region test test Queue```和```#pragma regiontest Dequue``` 部分
 ### 课件内容
 * 2.3队列
 ## 二叉树
-实现了二叉树的基本操作，二叉树同构的判断，详见```tree.h```。
+实现了二叉树的基本操作，二叉树同构的判断，详见```Tree.h```。
 
 测试程序详见```DataStructure.cpp```中的```#pragma region test binarytree```和```#pragma region test binary tree Isomorphic```部分
 ### 课件内容
@@ -117,7 +117,7 @@ To-Do：
 实现了冒泡排序、插入排序、希尔排序、选择排序、堆排序、归并排序、
 快速排序、桶排序、物理排序、表排序、基数排序算法
 
-详见```sort.h```
+详见```Sort.h```
 
 测试程序详见```DataStructure.cpp```中的```#pragma region test sort```和 ```#pragma region Insert or Merge```部分
 ### 课件内容
@@ -147,7 +147,7 @@ To-Do：
 ## KMP算法
 串的模式匹配
 
-详见```kmp.h```
+详见```Kmp.h```
 
 测试程序详见```DataStructure.cpp```中的```#pragma region test KMP```部分
 ### 课件内容
