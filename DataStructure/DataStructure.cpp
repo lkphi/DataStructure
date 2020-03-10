@@ -48,12 +48,12 @@ bool IsSafe(CPoint point)
 
 bool DFS(int index)
 {
+	isVisitdArray[index] = true;
 	if (IsSafe(cNodeArray[index])) return true;
 	for (int i = 0; i < crocodileCount; i++)
 	{
 		if (!isVisitdArray[i] && CanJump(cNodeArray[i], cNodeArray[index]))
 		{
-			isVisitdArray[i] = true;
 			if (DFS(i)) return true;
 			//isVisitdArray[i] = false;
 		}
@@ -67,12 +67,12 @@ bool BFS()
 	{
 		int index=cqueue->front();
 		cqueue->pop();
+		isVisitdArray[index] = true;
 		if (IsSafe(cNodeArray[index])) return true;
 		for (int i = 0; i < crocodileCount; i++)
 		{
 			if (!isVisitdArray[i] && CanJump(cNodeArray[i], cNodeArray[index]))
 			{
-				isVisitdArray[i] = true;
 				cqueue->push(i);
 			}
 		}
@@ -151,36 +151,36 @@ int main()
 	//List<int>* node = new List<int>();
 	//(node->PushBack(2)).PushBack(34);
 	//(*node).PushBack(54).PushBack(44).PushBack(32);
-	//std::cout << node;
+	//std::cout << node << '\n';
 	//(*node).BackInsert(3,89).BackInsert(3,23);
 	//(*node).FrontInsert(2,76);
 	//node->PrintList();
 	//(node->FrontInsert(-1, 89)).FrontInsert(2,55);
-	//std::cout << node;
+	//std::cout << node << '\n';
 	//node->FrontInsert(0, 89);
-	//std::cout << node;
+	//std::cout << node << '\n';
 	//node->FrontInsert(node->Length() + 1, 89);
-	//std::cout << node;
-	//std::cout << (*node)[4] << std::endl;
+	//std::cout << node << '\n';
+	//std::cout << (*node)[4] << '\n';
 	//node->ReverseList(0);
-	//std::cout << node;
+	//std::cout << node << '\n';
 	//node->ReverseList(1);
-	//std::cout << node;
+	//std::cout << node << '\n';
 	//node->ReverseList(2);
-	//std::cout << node;
+	//std::cout << node << '\n';
 	//node->ReverseList(node->Length() - 1);
 	//node->RemoveBaseOnData(44);
-	//std::cout << node;
-	//std::cout << node->Length() << std::endl;
+	//std::cout << node << '\n';
+	//std::cout << node->Length() << '\n';
 	//node->Release();
-	//std::cout << node->Length() << std::endl;
-	//std::cout << node;
+	//std::cout << node->Length() << '\n';
+	//std::cout << node << '\n';
 	//List<float>* fList = new List<float>{ 1.4f,5.4f,8.9f,0.5f };
 	//List<float>* fList1 = new List<float>{ };
-	//List<float> fList2 = { 1.4,6.7,9.0,4.5};
-	//std::cout << fList;
-	//std::cout << fList1;
-	//std::cout << fList2;
+	//List<float> fList2 = { 1.4f,6.7f,9.0f,4.5f};
+	//std::cout << fList << '\n';
+	//std::cout << fList1 << '\n';
+	//std::cout << fList2 << '\n';
 	//delete fList;
 	//fList = nullptr;
 	//delete fList1;
@@ -198,33 +198,34 @@ int main()
 	//Polygon<float>* p1 = new Polygon<float>(coef1, 5, exp1, 5);
 	//Polygon<float>* p2 = new Polygon<float>(coef2, 4, exp2, 4);
 	//Polygon<float> p3 = (*p) * (*p2);
-	//std::cout << "*p:  " << *p << std::endl;
-	//std::cout << "-(*p):  " << -(*p) << std::endl;
-	//std::cout << "(*p)(3):  " << (*p)(3) << std::endl;
-	//std::cout << "*p1:  " << *p1 << std::endl;
-	//std::cout << "-(*p1):  " << -(*p1) << std::endl;
-	//std::cout << "(*p1)(3):  " << (*p1)(3) << std::endl;
-	//std::cout << "(*p2):  " << (*p2) << std::endl;
-	//std::cout << "*p + *p1:  " << *p + *p1 << std::endl;
-	//std::cout << "*p - *p1:  " << *p - *p1 << std::endl;
-	//std::cout << "*p + *p1 +*p2:  " << *p + *p1 + *p2 << std::endl;
-	//std::cout << "*p - *p1 - *p2:  " << *p - *p1 - *p2 << std::endl;
-	//std::cout << "p3: " << p3 << std::endl;
+	//std::cout << "*p:  " << *p << '\n';
+	//std::cout << "+(*p):  " << +(*p) << '\n';
+	//std::cout << "-(*p):  " << -(*p) << '\n';
+	//std::cout << "(*p)(3):  " << (*p)(3) << '\n';
+	//std::cout << "*p1:  " << *p1 << '\n';
+	//std::cout << "-(*p1):  " << -(*p1) << '\n';
+	//std::cout << "(*p1)(3):  " << (*p1)(3) << '\n';
+	//std::cout << "(*p2):  " << (*p2) << '\n';
+	//std::cout << "*p + *p1:  " << *p + *p1 << '\n';
+	//std::cout << "*p - *p1:  " << *p - *p1 << '\n';
+	//std::cout << "*p + *p1 +*p2:  " << *p + *p1 + *p2 << '\n';
+	//std::cout << "*p - *p1 - *p2:  " << *p - *p1 - *p2 << '\n';
+	//std::cout << "p3: " << p3 << '\n';
 	//p3 *= (*p);
-	//std::cout << "p3: " << p3 << std::endl;
+	//std::cout << "p3: " << p3 << '\n';
 	//(*p2) += (*p1);
-	//std::cout << "(*p2):  " << *p2 << std::endl;
+	//std::cout << "(*p2):  " << *p2 << '\n';
 	//(*p2) -= (*p);
-	//std::cout << "(*p2):  " << *p2 << std::endl;
+	//std::cout << "(*p2):  " << *p2 << '\n';
 	//(*p2) = (*p1);
-	//std::cout << "(*p2):  " << *p2 << std::endl;
+	//std::cout << "(*p2):  " << *p2 << '\n';
 	//(*p) = (*p2) = (*p1);
-	//std::cout << "(*p2):  " << *p2 << std::endl;
-	//std::cout << "(*p):  " << *p << std::endl;
+	//std::cout << "(*p2):  " << *p2 << '\n';
+	//std::cout << "(*p):  " << *p << '\n';
 	//float coef4[] = { 2.0f,3.4f,5.3f,-2.0f,5.6f};
 	//int exp4[] = { 2,5,3,2,6 };
 	//Polygon<float>* p4 = new Polygon<float>(coef4, 5, exp4, 5);
-	//std::cout << *p4 << std::endl;
+	//std::cout << *p4 << '\n';
 	//delete p4;
 	//delete p2;
 	//delete p1;
@@ -237,35 +238,35 @@ int main()
 
 	#pragma region test stack
 	//stack<int>* int_stack = new stack<int>();
-	//std::cout << int_stack->IsEmpty() << std::endl;
-	//std::cout << int_stack->Size() << std::endl;
+	//std::cout << int_stack->IsEmpty() << '\n';
+	//std::cout << int_stack->Size() << '\n';
 
 	//int_stack->Push(2);
-	//std::cout << int_stack->IsEmpty() << std::endl;
-	//std::cout << int_stack->Size() << std::endl;
+	//std::cout << int_stack->IsEmpty() << '\n';
+	//std::cout << int_stack->Size() << '\n';
 
 	//int_stack->Push(342);
 	//int_stack->Push(56);
 	//int_stack->Push(87);
 	//int_stack->Push(324);
 	//int_stack->PrintStack();
-	//std::cout << int_stack->Top() << std::endl;
-	//std::cout << int_stack->Size() << std::endl;
-	//std::cout << int_stack->Pop() << std::endl;
+	//std::cout << int_stack->Top() << '\n';
+	//std::cout << int_stack->Size() << '\n';
+	//std::cout << int_stack->Pop() << '\n';
 	//int_stack->PrintStack();
 	//int_stack->Clear();
-	//std::cout << int_stack->IsEmpty() << std::endl;
-	//std::cout << int_stack->Size() << std::endl;
+	//std::cout << int_stack->IsEmpty() << '\n';
+	//std::cout << int_stack->Size() << '\n';
 	#pragma endregion
 
 	#pragma region test Stack
 	//Stack<int>* int_Stack = new Stack<int>();
-	//std::cout << "stack is emty?  :" << int_Stack->IsEmpty() << std::endl;
-	//std::cout << "the sizez of stack is " << int_Stack->Size() << std::endl;
+	//std::cout << "stack is emty?  :" << int_Stack->IsEmpty() << '\n';
+	//std::cout << "the sizez of stack is " << int_Stack->Size() << '\n';
 
 	//int_Stack->Push(2);
-	//std::cout << "stack is emty?  :" << int_Stack->IsEmpty() << std::endl;
-	//std::cout << "the size of stack is " << int_Stack->Size() << std::endl;
+	//std::cout << "stack is emty?  :" << int_Stack->IsEmpty() << '\n';
+	//std::cout << "the size of stack is " << int_Stack->Size() << '\n';
 
 	//int_Stack->Push(342);
 	//int_Stack->Push(56);
@@ -278,17 +279,17 @@ int main()
 
 	//int_Stack->Push(7);
 	//int_Stack->Push(65);
-	//std::cout << "the size of stack is " << int_Stack->Size() << std::endl;
+	//std::cout << "the size of stack is " << int_Stack->Size() << '\n';
 	//int_Stack->Push(54);
 	//int_Stack->Push(21);
 	//int_Stack->PrintStack();
-	//std::cout <<"the top element of satck is "<< int_Stack->Top() << std::endl;
-	//std::cout << "the size of stack is " << int_Stack->Size() << std::endl;
-	//std::cout <<"the pop element of satck is "<< int_Stack->Pop() << std::endl;
+	//std::cout <<"the top element of satck is "<< int_Stack->Top() << '\n';
+	//std::cout << "the size of stack is " << int_Stack->Size() << '\n';
+	//std::cout <<"the pop element of satck is "<< int_Stack->Pop() << '\n';
 	//int_Stack->PrintStack();
 	//int_Stack->Clear();
-	//std::cout << "stack is emty?  :" << int_Stack->IsEmpty() << std::endl;
-	//std::cout << "the size of stack is " << int_Stack->Size() << std::endl;
+	//std::cout << "stack is emty?  :" << int_Stack->IsEmpty() << '\n';
+	//std::cout << "the size of stack is " << int_Stack->Size() << '\n';
 	#pragma endregion
 
 	#pragma region test LoopQueue
@@ -300,15 +301,15 @@ int main()
 	//queue.push("five");
 	//queue.print();
 	//std::cout << queue;
-	//std::cout << "队列长度:" << queue.size() << std::endl;
-	//std::cout << queue.front() << std::endl;
+	//std::cout << "队列长度:" << queue.size() << '\n';
+	//std::cout << queue.front() << '\n';
 	//queue.pop();
-	//std::cout << "队列长度:" << queue.size() << std::endl;
-	//std::cout << queue.isFull() << std::endl;
+	//std::cout << "队列长度:" << queue.size() << '\n';
+	//std::cout << queue.isFull() << '\n';
 	//while (!queue.isEmpty()) {
 	//	queue.pop();
 	//}
-	//std::cout << queue.isEmpty() << std::endl;
+	//std::cout << queue.isEmpty() << '\n';
 	#pragma endregion
 
 	#pragma region test Queue
@@ -318,14 +319,16 @@ int main()
 	//queues.push("three");
 	//queues.push("four");
 	//queues.push("five");
-	//queues.print();
-	//std::cout << queues;
-	//std::cout << "队列长度:" << queues.size() << std::endl;
-	//std::cout << queues.front() << std::endl;
+	//queues.print();	
+	//std::cout << '\n';
+	//std::cout << queues << '\n';;
+	//std::cout << "队列长度:" << queues.size() << '\n';
+	//std::cout << queues.front() << '\n';
 	//queues.pop();
-	//std::cout << "队列长度:" << queues.size() << std::endl;
+	//std::cout << "队列长度:" << queues.size() << '\n';
 	//queues.print();
-	//std::cout << queues.isEmpty() << std::endl;
+	//std::cout << '\n';
+	//std::cout << queues.isEmpty() << '\n';
 	#pragma endregion
 
 	#pragma region test Dequue
@@ -337,46 +340,49 @@ int main()
 	//deque.push("five");
 	//deque.print();
 	//std::cout << deque;
-	//std::cout << "队列长度:" << deque.size() << std::endl;
-	//std::cout << deque.front() << std::endl;
+	//std::cout << "队列长度:" << deque.size() << '\n';
+	//std::cout << deque.front() << '\n';
 	//deque.pop();
-	//std::cout << "队列长度:" << deque.size() << std::endl;
+	//std::cout << "队列长度:" << deque.size() << '\n';
 	//deque.print();
 	//deque.back_append("six");
 	//deque.print();
-	//std::cout << deque;
+	//std::cout << deque << '\n';
 	//deque.front_append("zero");
 	//deque.print();
-
+	//std::cout << '\n';
 	//deque.front_remove();
 	//deque.print();
+	//std::cout << '\n';
+
 	//deque.back_remove();
 	//deque.print();
+	//std::cout << '\n';
 
-	//std::cout << deque[2] << std::endl;
-	//std::cout << deque.isEmpty() << std::endl;
+	//std::cout << deque[2] << '\n';
+	//std::cout << deque.isEmpty() << '\n';
 	#pragma endregion
 
 	#pragma region test BinarySearch
 	//int a[6] = { 12,23,34,56,78,90 };
-	//std::cout << BinarySearch(a, 6, 23) << std::endl;
-	//std::cout << BinarySearch(a, 6, 12) << std::endl;
-	//std::cout << BinarySearch(a, 6, 34) << std::endl;
-	//std::cout << BinarySearch(a, 6, 56) << std::endl;
-	//std::cout << BinarySearch(a, 6, 78) << std::endl;
-	//std::cout << BinarySearch(a, 6, 90) << std::endl;
-	//std::cout << BinarySearch(a, 6, 77) << std::endl;
-	//std::cout << BinarySearch(a, 6, 1000) << std::endl;
+	//std::cout << BinarySearch(a, 6, 23) << '\n';
+	//std::cout << BinarySearch(a, 6, 12) << '\n';
+	//std::cout << BinarySearch(a, 6, 34) << '\n';
+	//std::cout << BinarySearch(a, 6, 56) << '\n';
+	//std::cout << BinarySearch(a, 6, 78) << '\n';
+	//std::cout << BinarySearch(a, 6, 90) << '\n';
+	//std::cout << BinarySearch(a, 6, 77) << '\n';
+	//std::cout << BinarySearch(a, 6, 1000) << '\n';
 	//int b[5] = { 12,23,34,56,78 };
-	//std::cout << BinarySearch(b, 5, 23) << std::endl;
-	//std::cout << BinarySearch(b, 5, 12) << std::endl;
-	//std::cout << BinarySearch(b, 5, 34) << std::endl;
-	//std::cout << BinarySearch(b, 5, 56) << std::endl;
-	//std::cout << BinarySearch(b, 5, 78) << std::endl;
-	//std::cout << BinarySearch(b, 5, 563) << std::endl;
-	//std::cout << BinarySearch(b, 5, 782) << std::endl;
+	//std::cout << BinarySearch(b, 5, 23) << '\n';
+	//std::cout << BinarySearch(b, 5, 12) << '\n';
+	//std::cout << BinarySearch(b, 5, 34) << '\n';
+	//std::cout << BinarySearch(b, 5, 56) << '\n';
+	//std::cout << BinarySearch(b, 5, 78) << '\n';
+	//std::cout << BinarySearch(b, 5, 563) << '\n';
+	//std::cout << BinarySearch(b, 5, 782) << '\n';
 	//int c[7] = { 1,4,7,10,13,16,19 };
-	//std::cout << BinarySearch(c, 7, 10) << std::endl;
+	//std::cout << BinarySearch(c, 7, 10) << '\n';
 	#pragma endregion
 
 	#pragma region test binarytree
@@ -391,13 +397,13 @@ int main()
 	//biTree->PostOrderUsedByStack();
 	//biTree->PreOrderUsedByStack();
 	//biTree->PreOrderPrintLeaves();
-	//std::cout << "whether the tree is empty: " << biTree->IsEmpty() << std::endl;
-	//std::cout << "the count of leaf node: " << biTree->LeafNodeCount() << std::endl;
-	//std::cout << "the height of the tree is: " << biTree->PostOrderGetHeight() << std::endl;
+	//std::cout << "whether the tree is empty: " << biTree->IsEmpty() << '\n';
+	//std::cout << "the count of leaf node: " << biTree->LeafNodeCount() << '\n';
+	//std::cout << "the height of the tree is: " << biTree->PostOrderGetHeight() << '\n';
 	//char preOrderArray[] = { 'a', 'b', 'd', 'h', 'i', 'e','j', 'c', 'f', 'g' };
 	//char inOrderArray[] = { 'h', 'd', 'i', 'b', 'j', 'e', 'a', 'f', 'c', 'g' };
 	//biTree->GetPostOrderByPre_InOrderSeralize(preOrderArray, 10, inOrderArray, 10);
-	//std::cout << std::endl;
+	//std::cout << '\n';
 	//delete biTree;
 	//biTree = nullptr;
 	#pragma endregion
@@ -408,7 +414,7 @@ int main()
 	//bti->BuildTree();
 	//BinTreeArray<char>* bti1 = new BinTreeArray<char>();
 	//bti1->BuildTree();
-	//std::cout << std::boolalpha << bti->Isomorphic(*bti1) << std::endl;
+	//std::cout << std::boolalpha << bti->Isomorphic(*bti1) << '\n';
 	//delete bti;
 	//bti = nullptr;
 	//delete bti1;
@@ -438,17 +444,17 @@ int main()
 	//bbt->InOrderTraversal();
 	//bbt->PreOrderTraversal();
 	//bbt->LevelOrderTraversal();
-	//std::cout << bbt->FindMax()->data << std::endl;
-	//std::cout << bbt->FindMin()->data << std::endl;
+	//std::cout << bbt->FindMax()->data << '\n';
+	//std::cout << bbt->FindMin()->data << '\n';
 	//bool res = bbt->JugeSame(16);//7 3 11 1 5 9 13 0 2 4 6 8 10 12 14 15
-	//std::cout << std::boolalpha << res << std::endl;
+	//std::cout << std::boolalpha << res << '\n';
 	//bbt->Remove(5);
 	//bbt->PrintTree();
 	//bbt->Remove(7);
 	//bbt->PrintTree();
-	//std::cout << bbt->Find(3)->data << std::endl;
+	//std::cout << bbt->Find(3)->data << '\n';
 	//res = bbt->JugeSame(16);//7 3 11 1 5 9 13 0 2 4 6 8 10 12 14 15
-	//std::cout << std::boolalpha << res << std::endl;
+	//std::cout << std::boolalpha << res << '\n';
 	//delete bbt;
 	//bbt = nullptr;
 	
@@ -485,7 +491,7 @@ int main()
 	//printArray(table, 11);
 	//for (int i = 0; i < 11; ++i)
 	//	std::cout << a[table[i]] << " ";
-	//std::cout << std::endl;
+	//std::cout << '\n';
 	//Physical_Sort(a, 11, table);
 	//printArray(a, 11);
 	//delete[] table;
@@ -497,8 +503,8 @@ int main()
 	#pragma endregion
 
 	#pragma region Insert or Merge
-//插入排序前面有序，后面没有变化
-//归并排序：分段排序
+////插入排序前面有序，后面没有变化
+////归并排序：分段排序
 //int arrayLength;
 //std::cin >> arrayLength;
 //int* array = new int[arrayLength];
@@ -543,14 +549,14 @@ int main()
 //}
 //if (isInsertSort)
 //{
-//	std::cout << "Insertion Sort" << std::endl;
+//	std::cout << "Insertion Sort" << '\n';
 //	printArray(sortArray, arrayLength);
 //}
 //else
 //{
-//	std::cout << "Merge Sort" << std::endl;
+//	std::cout << "Merge Sort" << '\n';
 //	printArray(sortArray, arrayLength);
-//	std::cout << "归并次数：" << mergeCount << std::endl;
+//	std::cout << "归并次数：" << mergeCount << '\n';
 //}
 //
 //delete[] array;
@@ -648,7 +654,7 @@ int main()
 	//	}
 	//	index ++;
 	//}
-	//std::cout << std::endl;
+	//std::cout << '\n';
 	//delete[] indegree;
 	//delete graph;
 	//delete[] hashTable;
@@ -683,13 +689,13 @@ int main()
 	#pragma region test set
 	//int array[] = { 1,2,3,4,5 };
 	//Set<int>* set=new Set<int>(array, 5);
-	//std::cout << std::boolalpha <<set->CheckConnection(3, 2)<<std::endl;//false
+	//std::cout << std::boolalpha <<set->CheckConnection(3, 2)<<'\n';//false
 	//set->Union(3, 2);
-	//std::cout << std::boolalpha << set->CheckConnection(1, 5) << std::endl;//false
+	//std::cout << std::boolalpha << set->CheckConnection(1, 5) << '\n';//false
 	//set->Union(4,5);
 	//set->Union(2,4);
-	//std::cout << std::boolalpha << set->CheckConnection(3, 5) << std::endl;//true
-	//std::cout << set->SetCount() << std::endl;//2
+	//std::cout << std::boolalpha << set->CheckConnection(3, 5) << '\n';//true
+	//std::cout << set->SetCount() << '\n';//2
 	#pragma endregion
 
 	#pragma region test graph
@@ -706,22 +712,22 @@ int main()
 //mGraph->Insert(EdgeNode(3, 6, 4));
 //mGraph->Insert(EdgeNode(4, 6, 6));
 //mGraph->Insert(EdgeNode(5, 6, 1));
-//std::cout << std::boolalpha << mGraph->BFS(0) << std::endl;
-//std::cout << std::boolalpha << mGraph->DFS(0) << std::endl;
+//std::cout << std::boolalpha << mGraph->BFS(0) << '\n';
+//std::cout << std::boolalpha << mGraph->DFS(0) << '\n';
 //mGraph->Dijkstra(0);
 //for (int i = 0; i < 7; ++i)
 //	std::cout << mGraph->mShortestDist[i] << " ";
-//std::cout << std::endl;
+//std::cout << '\n';
 //for (int i = 0; i < 7; ++i)
 //	std::cout << mGraph->mShortestPathLastIndex[i] << " ";
-//std::cout << std::endl;
+//std::cout << '\n';
 //mGraph->MinHeapDijkstra(0);
 //for (int i = 0; i < 7; ++i)
 //	std::cout << mGraph->mShortestDist[i] << " ";
-//std::cout << std::endl;
+//std::cout << '\n';
 //for (int i = 0; i < 7; ++i)
 //	std::cout << mGraph->mShortestPathLastIndex[i] << " ";
-//std::cout << std::endl;
+//std::cout << '\n';
 //mGraph->Floyd();
 //for (int i = 0; i < 7; ++i)
 //{
@@ -739,14 +745,15 @@ int main()
 //{
 //	for (int i = 0; i < 7; ++i)
 //		std::cout << mGraph->mMSTParent[i] << " ";
-//	std::cout << std::endl;
+//	std::cout << '\n';
 //}
 //mGraph->Kruskal();
+//std::cout << '\n';
 //delete mGraph;
 //mGraph = nullptr;
 //
-//std::cout << "=========================" << std::endl;
-//std::cout << "=========================" << std::endl;
+//std::cout << "=========================" << '\n';
+//std::cout << "=========================" << '\n';
 //
 //TGraph<int>* tGraph = new TGraph<int>(7);
 //tGraph->Insert(EdgeNode(0, 1, 2));
@@ -761,29 +768,30 @@ int main()
 //tGraph->Insert(EdgeNode(3, 6, 4));
 //tGraph->Insert(EdgeNode(4, 6, 6));
 //tGraph->Insert(EdgeNode(5, 6, 1));
-//std::cout << std::boolalpha << tGraph->BFS(0) << std::endl;
-//std::cout << std::boolalpha << tGraph->DFS(0) << std::endl;
+//std::cout << std::boolalpha << tGraph->BFS(0) << '\n';
+//std::cout << std::boolalpha << tGraph->DFS(0) << '\n';
 //tGraph->Dijkstra(0);
 //for (int i = 0; i < 7; ++i)
 //	std::cout << tGraph->mShortestDist[i] << " ";
-//std::cout<< std::endl;
+//std::cout<< '\n';
 //for (int i = 0; i < 7; ++i)
 //	std::cout << tGraph->mShortestPathLastIndex[i] << " ";
-//std::cout << std::endl;
+//std::cout << '\n';
 //tGraph->MinHeapDijkstra(0);
 //for (int i = 0; i < 7; ++i)
 //	std::cout << tGraph->mShortestDist[i] << " ";
-//std::cout << std::endl;
+//std::cout << '\n';
 //for (int i = 0; i < 7; ++i)
 //	std::cout << tGraph->mShortestPathLastIndex[i] << " "; 
-//std::cout<< std::endl;
+//std::cout<< '\n';
 //if (tGraph->Prim(0))
 //{
 //	for (int i = 0; i < 7; ++i)
 //		std::cout << tGraph->mMSTParent[i] << " ";
-//	std::cout << std::endl;
+//	std::cout << '\n';
 //}
 //tGraph->Kruskal();
+//std::cout << '\n';
 //delete tGraph;
 //tGraph = nullptr;
 	#pragma endregion
@@ -845,16 +853,16 @@ int main()
 	#pragma region ouput result
 	//if (minPath != INT_MAX)
 	//{
-	//	std::cout << "Yes" << std::endl;
-		//std::cout << "最短路径为" << minPath << std::endl;
+	//	std::cout << "Yes" << '\n';
+		//std::cout << "最短路径为" << minPath << '\n';
 		//std::cout << "所经过的路径结点为:";
 		//while (!stackPath->IsEmpty())
 		//{
 		//	std::cout << stackPath->Pop() << " ";
 		//}
-		//std::cout << std::endl;
+		//std::cout << '\n';
 	//}
-	//else std::cout << "No" << std::endl;
+	//else std::cout << "No" << '\n';
 	//stackPath->Clear();
 	//delete stackPath;
 	#pragma endregion
@@ -877,7 +885,7 @@ int main()
 	//		isVisitdArray[i] = false;
 	//	int count = SDS_BFS(i);
 	//	float ans = count * 1.0f / (nodeCount * 1.0f) * 100;
-	//	std::cout << std::setiosflags(std::ios::fixed) << std::setprecision(2) << ans << "%" << std::endl;
+	//	std::cout << std::setiosflags(std::ios::fixed) << std::setprecision(2) << ans << "%" << '\n';
 	//}
 	#pragma endregion
 
@@ -956,7 +964,7 @@ int main()
 	//delete vertexQueue;
 	//indegree = nullptr;
 	//vertexQueue = nullptr;
-	//std::cout << keyPath->mDataArray[popVertex].earliestTime << std::endl;
+	//std::cout << keyPath->mDataArray[popVertex].earliestTime << '\n';
 	//keyPath->TopSort();
 	//keyPath->mDataArray[popVertex].latestTime = keyPath->mDataArray[popVertex].earliestTime;
 	////vertexStack->PrintStack();
@@ -975,7 +983,7 @@ int main()
 	//	}
 	//}
 	//for (int i = 0; i < vertexCount; ++i)
-	//	std::cout << keyPath->mDataArray[i].latestTime << " ";std::cout << std::endl;
+	//	std::cout << keyPath->mDataArray[i].latestTime << " ";std::cout << '\n';
 	//while (vertexArrayIndex >= 0)
 	//{
 	//	popVertex = vertexArray[vertexArrayIndex--];
@@ -985,7 +993,7 @@ int main()
 	//		int weight = weightArray[weightArrayIndex--];
 	//		int maneuverTime = keyPath->mDataArray[directedVertex].latestTime - keyPath->mDataArray[popVertex].earliestTime - weight;
 	//		if (maneuverTime > 0)
-	//			std::cout << directedVertex << "的机动时间：" << maneuverTime << std::endl;
+	//			std::cout << directedVertex << "的机动时间：" << maneuverTime << '\n';
 	//	}
 	//}
 	//delete[] outdegree;
@@ -1028,8 +1036,8 @@ int main()
 	//}
 	//int index = graph->FindMinPoint2OtherPoint() + 1;
 	////if (index != 0)
-	//	std::cout << graph->FindMinPoint2OtherPoint() + 1 << std::endl;
-	////else std::cout << "找不到这样的动物！" << std::endl;
+	//	std::cout << graph->FindMinPoint2OtherPoint() + 1 << '\n';
+	////else std::cout << "找不到这样的动物！" << '\n';
 	//delete graph;
 	//graph = nullptr;
 	#pragma endregion
@@ -1037,8 +1045,8 @@ int main()
 	#pragma region test KMP
 //char str[] = "bbc abcdab abcdabcdabde";//"asasghjebjefhbajdenf";
 //char pattern[] = "dab";//"gh";
-//std::cout << KMP(str, pattern) << std::endl;
-//std::cout << Kmp(str, pattern) << std::endl;
+//std::cout << KMP(str, pattern) << '\n';
+//std::cout << Kmp(str, pattern) << '\n';
 
 #pragma endregion
 	return 0;
@@ -1050,7 +1058,7 @@ void printArray(int a[],unsigned int length)
 	{	
 		std::cout << a[i] << " ";
 	}
-	std::cout << std::endl;
+	std::cout << '\n';
 }
 void printArray(char a[], unsigned int length)
 {
@@ -1058,6 +1066,6 @@ void printArray(char a[], unsigned int length)
 	{
 		std::cout << a[i] << " ";
 	}
-	std::cout << std::endl;
+	std::cout << '\n';
 }
 

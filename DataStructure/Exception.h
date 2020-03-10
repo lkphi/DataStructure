@@ -9,7 +9,7 @@
 class OutOfRange :public std::exception
 {
 public:
-	const char* what()const throw()
+	const char* what()const noexcept
 	{
 		return "Error! Out Of Range.\n";
 	}
@@ -18,7 +18,7 @@ public:
 class BadSize :public std::exception
 {
 public:
-	const char* what()const throw()
+	const char* what()const noexcept
 	{
 		return "Error! Bad Size.\n";
 	}
@@ -27,7 +27,7 @@ public:
 class FailedApplyForSpace :public std::exception
 {
 public:
-	const char* what()const throw()
+	const char* what()const noexcept
 	{
 		return "Error! Apply For Space Failed.\n";
 	}

@@ -90,7 +90,7 @@ inline std::ostream& operator<<(std::ostream& os,const LoopQueue<U>& queue)
 	if (queue.isEmpty())	return os;
 	for (int i = queue.mFront; i <= queue.mRear; i++)
 		os << queue.mQueueArray[i] << " ";
-	os << std::endl;
+	//os << std::endl;
 	return os;
 }
 
@@ -198,7 +198,7 @@ inline std::ostream& operator<<(std::ostream& os, const queue<U>& queue)
 		os << cur->data << " ";
 		cur = cur->next;
 	}
-	os << std::endl;
+	//os << std::endl;
 	return os;
 }
 

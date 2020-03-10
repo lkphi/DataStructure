@@ -33,14 +33,22 @@ private:
 template<typename T>
 inline Set<T>::Set(T array[], int arrayLength)
 {
-	mSetArray = new SetType[arrayLength];
-	if (!mSetArray) throw;
-	mSize = arrayLength;
-	for (int i = 0; i < mSize; i++)
+	try
 	{
-		mSetArray[i].data = array[i];
-		mSetArray[i].mParent = -1;
+		mSetArray = new SetType[arrayLength];
+		if (!mSetArray) throw FailedApplyForSpace();
+		mSize = arrayLength;
+		for (int i = 0; i < mSize; i++)
+		{
+			mSetArray[i].data = array[i];
+			mSetArray[i].mParent = -1;
+		}
 	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
 }
 
 template<typename T>
@@ -114,18 +122,26 @@ private:
 
 inline Set<int>::Set(int array[], int arrayLength)
 {
-	mSetArray = new SetType<int>[SETRANGEMAX];
-	if (!mSetArray) throw;
-	mSize = arrayLength;
-	for (int i = 0; i < mSize; i++)
+	try
 	{
-		mSetArray[array[i]].mParent = -1;
+		mSetArray = new SetType<int>[SETRANGEMAX];
+		if (!mSetArray) throw FailedApplyForSpace();
+		mSize = arrayLength;
+		for (int i = 0; i < mSize; i++)
+		{
+			mSetArray[array[i]].mParent = -1;
+		}
 	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
 }
 
 inline int Set<int>::Find(const int& data)
 {
-	if (data >= 0 && data <= SETRANGEMAX && mSetArray[data].mParent != SETRANGEMAX+1)
+	if (data >= 0 && data <= SETRANGEMAX && mSetArray[data].mParent != SETRANGEMAX + 1)
 	{
 		//路径压缩的方法
 		return FindUsePathCompression(data);

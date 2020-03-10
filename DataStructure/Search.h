@@ -66,7 +66,7 @@ public:
 	BiNode<T>* FindMin();
 	BiNode<T>* FindMax();
 	virtual bool Insert(T data);
-	bool Remove(T data);
+	virtual bool Remove(T data);
 	void GetCompleteBinTree(T* sortArray, int arrayLength, T* completeBinTreeArray);
 	bool JugeSame(int nodeCount);
 	void ResetFlag();
@@ -133,7 +133,7 @@ inline BiNode<T>* BinSearchTree<T>::_Insert(T data, BiNode<T>* bsTree, bool& isI
 	if (!bsTree)//若树为空
 	{
 		bsTree = new BiNode<T>(data);
-		bsTree->mLChild = bsTree->mRChild = nullptr;
+		//bsTree->mLChild = bsTree->mRChild = nullptr;
 		bsTree->nodeApperanceTimes = 0;
 		isInsertSucess = true;
 	}
@@ -193,7 +193,7 @@ inline BiNode<T>* BinSearchTree<T>::Remove(T data, BiNode<T>* bsTree)
 			if (!bsTree->mLChild)//有右孩子或无子结点
 				bsTree = bsTree->mRChild;
 			else if (!bsTree->mRChild)//有左孩子或无子结点
-				bsTree = bsTree->mRChild;
+				bsTree = bsTree->mLChild;
 			delete minChild;
 		}
 	}
@@ -356,8 +356,8 @@ inline BiNode<T>* BalanceBinTree<T>::_Insert(T data, BiNode<T>* bsTree, bool& is
 	if (!bsTree)//若树为空
 	{
 		bsTree = new BiNode<T>(data);
-		bsTree->mLChild = bsTree->mRChild = nullptr;
-		bsTree->nodeApperanceTimes = 0;
+		//bsTree->mLChild = bsTree->mRChild = nullptr;
+		//bsTree->nodeApperanceTimes = 0;
 		bsTree->balanceFactor = EqualHigh;
 		isHeightChanged = true;
 		isInsertSucess = true;

@@ -17,12 +17,13 @@ void BuildNext(const char* pattern, int* next)
 			++j;
 			//如果循环条件i < patternLength时这步当循环进入i=patternLength-1时
 			//由于前面++i,导致i=patternLength
-			//match[patternLength]会出现数组越界,
-			//而事实上pattern[patternLength]是没有意义的（此时KMP程序中匹配应该早已结束）
+			//match[patternLength]会出现数组越界
+			//如果在++后当前i的值不与前缀j处相同则
+			//若相等，则证明当前串与前缀串相同，因此可以直接使用前缀串的next的值，而不用重复比较过程
 			if (pattern[i] == pattern[j])
-				next[i] = j;
-			else
 				next[i] = next[j];
+			else
+				next[i] = j;
 		}
 		else {
 			j = next[j];
@@ -32,32 +33,41 @@ void BuildNext(const char* pattern, int* next)
 
 Position KMP(const char* str, const char* pattern)//O(n+m+Tm),n=strlen(str),m=strlen(pattern)
 {
-	int i = 0, j = 0;
-	int strLength = strlen(str);//O(n)
-	//注意这步是必须的，后面会出现-1<strlen(pattern),而strlen(pattern)返回无符号整型
-	//无符号整型与有符号整型比较大小时，有符号整型会强制转换成无符号整型，-1就变成255
-	///会出现-1>strlen(pattern)的错误情况
-	int patternLength = strlen(pattern);//O(m)
-	int* next = new int[patternLength];//当GetMatch中循环条件为i < patternLength必须加1,
-	if (!next) throw;
-	BuildNext(pattern, next);
-	while (i < strLength && j < patternLength)
+	try
 	{
-		if (j == -1 || str[i] == pattern[j])
+		int i = 0, j = 0;
+		int strLength = strlen(str);//O(n)
+		//注意这步是必须的，后面会出现-1<strlen(pattern),而strlen(pattern)返回无符号整型
+		//无符号整型与有符号整型比较大小时，有符号整型会强制转换成无符号整型，-1就变成255
+		///会出现-1>strlen(pattern)的错误情况
+		int patternLength = strlen(pattern);//O(m)
+		int* next = new int[patternLength];//当GetMatch中循环条件为i < patternLength必须加1,
+		if (!next) throw FailedApplyForSpace();
+		BuildNext(pattern, next);
+		while (i < strLength && j < patternLength)
 		{
-			++i;
-			++j;
+			if (j == -1 || str[i] == pattern[j])
+			{
+				++i;
+				++j;
+			}
+			else {
+				j = next[j];
+			}
 		}
-		else {
-			j = next[j];
-		}
+		delete[] next;
+		next = nullptr;
+		//if (j == patternLength)
+		//	return i - j;
+		//return -1;
+		return (j == patternLength) ? i - j : -1;
 	}
-	delete[] next;
-	next = nullptr;
-	//if (j == patternLength)
-	//	return i - j;
-	//return -1;
-	return (j == patternLength) ? i - j : -1;
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return -1;
+	}
+
 }
 
 ///if(pattern[match[i-1]+1]==pattern[i])
@@ -81,25 +91,34 @@ void BuildMatch(const char* pattern, int* match)
 
 Position Kmp(const char* str, const char* pattern)
 {
-	int i = 0, j = 0;
-	int strLength = strlen(str);
-	int patternLength = strlen(pattern);
-	int* match = new int[patternLength];
-	if (!match) throw;
-	BuildMatch(pattern, match);
-	while (i < strLength && j < patternLength)
+	try
 	{
-		if (str[i] == pattern[j])
+		int i = 0, j = 0;
+		int strLength = strlen(str);
+		int patternLength = strlen(pattern);
+		int* match = new int[patternLength];
+		if (!match) throw FailedApplyForSpace();
+		BuildMatch(pattern, match);
+		while (i < strLength && j < patternLength)
 		{
-			++i;
-			++j;
+			if (str[i] == pattern[j])
+			{
+				++i;
+				++j;
+			}
+			else if (j > 0) {
+				j = match[j - 1] + 1;
+			}
+			else ++i;
 		}
-		else if (j > 0) {
-			j = match[j - 1] + 1;
-		}
-		else ++i;
+		delete[] match;
+		match = nullptr;
+		return j == patternLength ? i - j : -1;
 	}
-	delete[] match;
-	match = nullptr;
-	return j == patternLength ? i - j : -1;
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return -1;
+	}
+
 }

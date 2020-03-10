@@ -249,7 +249,7 @@ inline std::ostream& operator<<(std::ostream& os, MinHeap<T>& minHeap)
 	{
 		os << minHeap.mHeapTreeArray[i]<< " ";
 	}
-	os << std::endl;
+	//os << '\n';
 }
 
 #pragma region Huffman Tree
@@ -287,18 +287,20 @@ inline MinHeap<HuffmanTreeNode<T>*>::MinHeap()//:this->mCapacity(10)
 template<typename T>
 inline MinHeap<HuffmanTreeNode<T>*>::MinHeap(int maxSize)// :this->mCapacity(maxSize)
 {
-	this->mCapacity = maxSize;
-	this->mHeapTreeArray = new HuffmanTreeNode<T> * [this->mCapacity];
-	if (!this->mHeapTreeArray)
+	try
 	{
-		this->mCapacity = 0;
-		throw;
+		this->mCapacity = maxSize;
+		this->mHeapTreeArray = new HuffmanTreeNode<T> * [this->mCapacity];
+		if (!this->mHeapTreeArray)
+		{
+			this->mCapacity = 0;
+			throw FailedApplyForSpace();
+		}
 	}
-	//for (int i = 0; i < mCapacity; i++)
-	//{
-	//	HuffmanTreeNode<T>* huffmanTreeNode = new HuffmanTreeNode<T>();
-	//	this->mHeapTreeArray[i] = huffmanTreeNode;
-	//}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }
 
 template<typename T>
@@ -398,7 +400,7 @@ inline std::ostream& operator<<(std::ostream& os, MinHeap<HuffmanTreeNode<U>*>& 
 	{
 		os << minHeap.mHeapTreeArray[i]->mWeight << " ";
 	}
-	os << std::endl;
+	//os << '\n';
 	return os;
 }
 
@@ -477,7 +479,7 @@ template<typename T>
 inline void HuffmanTree<T>::PreOrderTraversal()const
 {
 	PreOrderTraversal(mRoot);
-	std::cout << std::endl;
+	//std::cout << '\n';
 }
 template<typename T>
 inline void HuffmanTree<T>::HuffmanCoded()

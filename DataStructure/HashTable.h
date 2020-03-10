@@ -74,14 +74,22 @@ public:
 template<typename T>
 inline HashTable<T>::HashTable(int tableSize)
 {
-	if (tableSize < minTableSize)
+	try
 	{
-		std::cout << "table size is too small" << std::endl;
-		return;
+		if (tableSize < minTableSize)
+		{
+			std::cout << "table size is too small" << std::endl;
+			return;
+		}
+		mTableSize = NextPrimer(tableSize);
+		mCells = new Cell[mTableSize];
+		if (!mCells) throw FailedApplyForSpace();
 	}
-	mTableSize = NextPrimer(tableSize);
-	mCells = new Cell[mTableSize];
-	if (!mCells) throw;
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
 }
 
 ///返回大于num的最小素数
@@ -191,14 +199,21 @@ public:
 
 inline hashTable::hashTable(int tableSize)
 {
-	if (tableSize < minTableSize)
+	try
 	{
-		std::cout << "table size is too small" << std::endl;
-		return;
+		if (tableSize < minTableSize)
+		{
+			std::cout << "table size is too small" << std::endl;
+			return;
+		}
+		mTableSize = NextPrimer(tableSize);
+		mList = new tblNode<char*>[mTableSize];
+		if (!mList) throw FailedApplyForSpace();
 	}
-	mTableSize = NextPrimer(tableSize);
-	mList = new tblNode<char*>[mTableSize];
-	if (!mList) throw;
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }
 
 inline tblNode<char*>* hashTable::Find(const char* key)

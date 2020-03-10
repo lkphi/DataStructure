@@ -36,7 +36,7 @@ private:
 		}
 		catch (std::exception & e)
 		{
-			std::cout << e.what() << std::endl;
+			std::cout << e.what() << '\n';
 		}
 	}
 
@@ -103,7 +103,7 @@ private:
 			head = head->next;
 		}
 		if (!head)
-			std::cerr << "this data is not exist£¡" << std::endl;
+			std::cerr << "this data is not exist£¡" << '\n';
 	}
 public:
 	LList() :m_Head(nullptr), count(0) {}
@@ -122,7 +122,7 @@ public:
 			}
 			catch (std::exception & e)
 			{
-				std::cout << e.what() << std::endl;
+				std::cout << e.what() << '\n';
 			}
 		}
 	}
@@ -180,7 +180,7 @@ public:
 			os << head->data << " ";
 			head = head->next;
 		}
-		os << std::endl;
+		//os << std::endl;
 		return os;
 	}
 	~LList()
@@ -228,7 +228,7 @@ public:
 		}
 		catch (std::exception & e)
 		{
-			std::cout << e.what() << std::endl;
+			std::cout << e.what() << '\n';
 		}
 		Node<T>* head = m_Head;
 		Node<T>* nextNode = head->next;

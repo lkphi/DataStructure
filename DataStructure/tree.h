@@ -16,6 +16,7 @@ class BiNode {
 public:
 	BiNode* mLChild;
 	BiNode* mRChild;
+	BiNode* mParent;//ÎªºìºÚÊ÷×¼±¸
 	T data;
 	BiNode() :mLChild(nullptr), mRChild(nullptr) {}
 	BiNode(T data) :mLChild(nullptr), mRChild(nullptr), data(data) {}

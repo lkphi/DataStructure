@@ -159,7 +159,7 @@ inline std::ostream& operator<<(std::ostream& os, const stack<U>& cStack)
 		os << curNode->data << " ";
 		curNode = curNode->next;
 	}
-	os << std::endl;
+	//os << std::endl;
 #pragma region top in LinearList tail
 	//if (cStack.mBaseNode == nullptr)
 	//	return;
@@ -207,10 +207,18 @@ public:
 template<typename T>
 inline Stack<T>::Stack()
 {
-	mStackArray = new T[10];
-	if (!mStackArray) throw FailedApplyForSpace();
-	mTop = -1;
-	mCapacity = 10;
+	try
+	{
+		mStackArray = new T[10];
+		if (!mStackArray) throw FailedApplyForSpace();
+		mTop = -1;
+		mCapacity = 10;
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
 }
 
 template<typename T>
@@ -222,8 +230,15 @@ inline int Stack<T>::Size()const
 template<typename T>
 inline T Stack<T>::Pop()
 {
-	if (mTop == -1) throw OutOfRange();
-	return mStackArray[mTop--];
+	try {
+		if (mTop == -1) throw OutOfRange();
+		return mStackArray[mTop--];
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return T();
+	}
 }
 
 template<typename T>
@@ -243,8 +258,15 @@ inline void Stack<T>::Push(T data)
 template<typename T>
 inline T Stack<T>::Top()const
 {
-	if (mTop == -1) throw OutOfRange();
-	return mStackArray[mTop];
+	try {
+		if (mTop == -1) throw OutOfRange();
+		return mStackArray[mTop];
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << "\n";
+		return T();
+	}
 }
 
 template<typename T>
@@ -266,19 +288,27 @@ inline std::ostream& operator<<(std::ostream& os, const Stack<U>& cStack)
 	if (cStack.mTop == -1)return os;
 	for (int i = 0; i < cStack.mTop; ++i)
 		os << cStack.mStackArray[i] << " ";
-	os << std::endl;
+	//os << std::endl;
 	return os;
 }
 template<typename T>
 inline void Stack<T>::Expand()
 {
-	T* newStackArray = new T[mCapacity*2];
-	if (newStackArray == nullptr)
-		throw FailedApplyForSpace();
-	for (int i = 0; i < mCapacity; i++)
-		newStackArray[i] = mStackArray[i];
-	mCapacity *= 2;
-	delete[] mStackArray;
-	mStackArray = newStackArray;
+	try
+	{
+		T* newStackArray = new T[mCapacity * 2];
+		if (newStackArray == nullptr)
+			throw FailedApplyForSpace();
+		for (int i = 0; i < mCapacity; i++)
+			newStackArray[i] = mStackArray[i];
+		mCapacity *= 2;
+		delete[] mStackArray;
+		mStackArray = newStackArray;
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
 }
 #endif

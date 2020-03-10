@@ -25,6 +25,7 @@ Polygon<T> operator +(const Polygon<T>& polygon);
 Polygon<T> operator -(const Polygon<T>& polygon);
 Polygon<T> operator *(const Polygon<T>& polygon);
 const Polygon<T> operator -()const;
+const Polygon<T>& operator +()const;
 Polygon<T>& operator +=(const Polygon<T>& polygon);
 Polygon<T>& operator -=(const Polygon<T>& polygon);
 Polygon<T>& operator *=(const Polygon<T>& polygon);
@@ -91,6 +92,12 @@ inline const Polygon<T> Polygon<T>::operator-()const
 		head = head->next;
 	}
 	return *newPolygon;
+}
+
+template<class T>
+inline const Polygon<T>& Polygon<T>::operator+() const
+{
+	return *this;
 }
 
 template<class T>

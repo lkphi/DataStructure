@@ -248,7 +248,7 @@ void Heap_Sort(T array[], int arrayLength)
 	for (int i = arrayLength - 1; i > 0; i--)
 	{
 		Swap(array[0], array[i]);
-		PercDown(array, 0, i + 1);
+		PercDown(array, 0, i);
 	}
 }
 
@@ -478,7 +478,7 @@ void Physical_Sort(T array[], int arrayLength, int* table)
 	{
 		T temp = array[i];
 		int curIndex = i;
-		while (table[curIndex] != curIndex)
+		while (table[curIndex] != curIndex)//判断一个环是否结束
 		{
 			int nextIndex = table[curIndex];
 			if (table[nextIndex] == nextIndex)
