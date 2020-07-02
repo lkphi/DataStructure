@@ -61,6 +61,7 @@ public:
 	int PostOrderGetHeight()const;
 	void PrintTree()const;
 	void GetPostOrderByPre_InOrderSeralize(T* preOrderArray, int preOrderArrayLen, T* InOrderArray, int InOrderArrayLen);
+	BiNode<T>* GetTreeByPre_InOrderSeralize(T* preOrderArray, int preOrderArrayLen, T* InOrderArray, int InOrderArrayLen);
 	virtual ~BiTree() { Release(mRoot); this->mRoot = nullptr;}
 };
 
@@ -181,7 +182,7 @@ inline void BiTree<T>::PostOrderUsedByStack(BiNode<T>* biTree) const
 		if (tempTree->mLChild) sTree.Push(tempTree->mLChild);
 		if (tempTree->mRChild) sTree.Push(tempTree->mRChild);
 	}
-	while (!sPrintTree.IsEmpty())
+	while (!sPrintTree.IsEmpty()) 
 	{
 		tempTree = sPrintTree.Pop();
 		std::cout << tempTree->data << " ";
@@ -437,6 +438,18 @@ inline void BiTree<T>::GetPostOrderByPre_InOrderSeralize(T* preOrderArray, int p
 	GetPostOrderByPre_InOrderSeralize(preOrderArray + 1, index, InOrderArray, index );
 	GetPostOrderByPre_InOrderSeralize(preOrderArray + index + 1, preOrderArrayLen - index - 1, InOrderArray + index + 1, InOrderArrayLen - index - 1);
 	std::cout << *preOrderArray << " ";
+}
+
+template<typename T>
+inline BiNode<T>* BiTree<T>::GetTreeByPre_InOrderSeralize(T* preOrderArray, int preOrderArrayLen, T* InOrderArray, int InOrderArrayLen)
+{
+	if (!preOrderArray || !InOrderArray || preOrderArrayLen <= 0 || InOrderArrayLen <= 0 || preOrderArrayLen != InOrderArrayLen)
+		return nullptr;
+	BiNode<T>* root = new BiTree<T>(preOrderArray[0]);
+	int index = FindIndex(InOrderArray, InOrderArrayLen, *preOrderArray);
+	if (index == -1)return nullptr;
+	root->mLChild=GetPostOrderByPre_InOrderSeralize(preOrderArray + 1, index, InOrderArray, index);
+	root->mRChild=GetPostOrderByPre_InOrderSeralize(preOrderArray + index + 1, preOrderArrayLen - index - 1, InOrderArray + index + 1, InOrderArrayLen - index - 1);
 }
 
 template<typename T>

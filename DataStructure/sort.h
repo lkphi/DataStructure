@@ -219,6 +219,7 @@ void DoubleSelection_Sort(T array[], int arrayLength)
 ///
 ///堆排序，处理N个不同元素的随机排列的平均次数是2NlogN-O(NloglogN)
 ///虽然堆排序给出最佳平均时间复杂度，但实际效果不如用sedgewick增量序列的希尔排序
+///对下标从startIndex开始长度为length数组进行最大堆调整
 ///
 template<class T>
 bool PercDown(T array[], int startIndex, int length)

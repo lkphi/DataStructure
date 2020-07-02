@@ -53,7 +53,7 @@ inline int stack<T>::Size()const
 template<typename T>
 inline T stack<T>::Pop()
 {
-	if (IsEmpty()) return T();
+	if (IsEmpty()) throw;
 	T popData = mTopNode->data;
 	stackNode<T>* popNode = mTopNode;
 	mTopNode = mTopNode->next;
@@ -286,7 +286,7 @@ template<class U>
 inline std::ostream& operator<<(std::ostream& os, const Stack<U>& cStack)
 {
 	if (cStack.mTop == -1)return os;
-	for (int i = 0; i < cStack.mTop; ++i)
+	for (int i = 0; i <= cStack.mTop; ++i)
 		os << cStack.mStackArray[i] << " ";
 	//os << std::endl;
 	return os;

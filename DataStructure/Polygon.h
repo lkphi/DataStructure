@@ -156,7 +156,7 @@ inline Polygon<T>& Polygon<T>::operator+=(const Polygon<T>& polygon)
 	//ClearData(thisPolygonData);
 	//return *this;
 #pragma endregion 
-
+	if (!polygon.mHead) return *this;
 	PolyNode<T>* head1 = polygon.mHead->next;
 	PolyNode<T>* head2 = this->mHead;
 	while (head1)

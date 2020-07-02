@@ -69,7 +69,7 @@ inline void Set<T>::Union(const T& data1, const T& data2)
 {
 	int root1 = Find(data1);
 	int root2 = Find(data2);
-	if (root1 == root2 || root1 == -1 || root2 == -1) return;
+	if (root1 == root2 /*|| root1 == -1 || root2 == -1*/) return;
 	//注意集合的元素个数是负数，比大小时的时候与正数相反
 	//按秩归并
 	if (mSetArray[root2].mParent > mSetArray[root1].mParent)//不相同,做处理，相同说明就是同一个集合
@@ -172,7 +172,7 @@ inline void Set<int>::Union(const int& data1, const int& data2)
 {
 	int root1 = Find(data1);
 	int root2 = Find(data2);
-	if (root1 == root2 || root1 == -1 || root2 == -1) return;
+	if (root1 == root2 /*|| root1 == -1 || root2 == -1*/) return;
 	if (mSetArray[root2].mParent > mSetArray[root1].mParent)//不相同,做处理，相同说明就是同一个集合
 	{
 		int root2SetCount = mSetArray[root2].mParent;

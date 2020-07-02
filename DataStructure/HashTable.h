@@ -4,7 +4,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <cmath>
 #include <iostream>
-#include <string.h>
+#include <cstring>
 #include "LinearList.h"
 
 #pragma warning (disable:4996)

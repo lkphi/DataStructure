@@ -101,10 +101,10 @@ template<typename T>
 inline BiNode<T>* BinSearchTree<T>::FindMin(BiNode<T>* bsTree)
 {
 	#pragma region solution1
-	if (!bsTree) return nullptr;
-	else if (!bsTree->mLChild)
-		return bsTree;
-	else return FindMin(bsTree->mLChild);
+	//if (!bsTree) return nullptr;
+	//else if (!bsTree->mLChild)
+	//	return bsTree;
+	//else return FindMin(bsTree->mLChild);
 	#pragma endregion
 	if (bsTree)
 	{

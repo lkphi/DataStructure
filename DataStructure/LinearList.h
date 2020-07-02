@@ -248,6 +248,28 @@ public:
 		this->m_Head->next = nextNode;
 		this->m_Head = head;
 	}
+
+	void Reverse(int index)
+	{
+		try {
+			if (index <0 || index >count - 1 || !m_Head)
+				throw new OutOfRange();
+		}
+		catch (std::exception & e)
+		{
+			std::cout << e.what() << '\n';
+		}
+		Node<T>* cur = m_Head->next;
+		Node<T>* reversePartTail = m_Head;
+		for (int i = 1; i < index; i++)
+		{
+			Node<T>* nextNode = cur->next;
+			cur->next = m_Head;
+			m_Head = cur;
+			cur = nextNode;
+		}
+		reversePartTail->next = cur;
+	}
 };
 template<typename T>
 using List =LList<T>;
