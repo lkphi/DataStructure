@@ -154,7 +154,7 @@ void Shell_Sort(T array[], int arrayLength)
 		{
 			insertElement = array[i];
 			j = i;
-			for (; j >= interval && array[j - 1] > insertElement; j -= interval)
+			for (; j >= interval && array[j - interval] > insertElement; j -= interval)
 			{
 				array[j] = array[j - interval];
 			}
